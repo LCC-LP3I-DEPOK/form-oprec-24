@@ -1,4 +1,4 @@
-window.onload = function () {
+ window.onload = function () {
 
 const name = document.getElementById('name');
 const major = document.getElementById('major');
@@ -8,90 +8,78 @@ const securitycode = document.getElementById('securitycode');
 const output = document.getElementById('output');
 const ccicon = document.getElementById('ccicon');
 const ccsingle = document.getElementById('ccsingle');
+const classCode = document.getElementById('class_code');
+const nimNumberDisplay = document.getElementById('nimNumber');
 // const generatecard = document.getElementById('generatecard');
 
 
 let cctype = null;
 
 //Mask the Credit Card Number Input
-var cardnumber_mask = new IMask(cardnumber, {
-    mask: [
-        {
-            mask: '0000 000000 00000',
-            regex: '^3[47]\\d{0,13}',
-            cardtype: 'american express'
-        },
-        {
-            mask: '0000 0000 0000 0000',
-            regex: '^(?:6011|65\\d{0,2}|64[4-9]\\d?)\\d{0,12}',
-            cardtype: 'discover'
-        },
-        {
-            mask: '0000 000000 0000',
-            regex: '^3(?:0([0-5]|9)|[689]\\d?)\\d{0,11}',
-            cardtype: 'diners'
-        },
-        {
-            mask: '0000 0000 0000 0000',
-            regex: '^(5[1-5]\\d{0,2}|22[2-9]\\d{0,1}|2[3-7]\\d{0,2})\\d{0,12}',
-            cardtype: 'mastercard'
-        },
-        // {
-        //     mask: '0000-0000-0000-0000',
-        //     regex: '^(5019|4175|4571)\\d{0,12}',
-        //     cardtype: 'dankort'
-        // },
-        // {
-        //     mask: '0000-0000-0000-0000',
-        //     regex: '^63[7-9]\\d{0,13}',
-        //     cardtype: 'instapayment'
-        // },
-        {
-            mask: '0000 000000 00000',
-            regex: '^(?:2131|1800)\\d{0,11}',
-            cardtype: 'jcb15'
-        },
-        {
-            mask: '0000 0000 0000 0000',
-            regex: '^(?:35\\d{0,2})\\d{0,12}',
-            cardtype: 'jcb'
-        },
-        {
-            mask: '0000 0000 0000 0000',
-            regex: '^(?:5[0678]\\d{0,2}|6304|67\\d{0,2})\\d{0,12}',
-            cardtype: 'maestro'
-        },
-        // {
-        //     mask: '0000-0000-0000-0000',
-        //     regex: '^220[0-4]\\d{0,12}',
-        //     cardtype: 'mir'
-        // },
-        {
-            mask: '0000 0000 0000 0000',
-            regex: '^4\\d{0,15}',
-            cardtype: 'visa'
-        },
-        {
-            mask: '0000 0000 0000 0000',
-            regex: '^62\\d{0,14}',
-            cardtype: 'unionpay'
-        },
-        {
-            mask: '0000 0000 0000 0000',
-            cardtype: 'Unknown'
-        }
-    ],
-    dispatch: function (appended, dynamicMasked) {
-        var number = (dynamicMasked.value + appended).replace(/\D/g, '');
+// var cardnumber_mask = new IMask(cardnumber, {
+//     mask: [
+//         {
+//             mask: '0000 0000 0000 0000',  // Format untuk semua mask, menggunakan 4 angka spasi
+//             regex: '^3[47]\\d{0,13}',
+//             cardtype: 'american express'
+//         },
+//         {
+//             mask: '0000 0000 0000 0000',  // Format yang sama di sini
+//             regex: '^(?:6011|65\\d{0,2}|64[4-9]\\d?)\\d{0,12}',
+//             cardtype: 'discover'
+//         },
+//         {
+//             mask: '0000 0000 0000 0000',  // Format yang sama di sini
+//             regex: '^3(?:0([0-5]|9)|[689]\\d?)\\d{0,11}',
+//             cardtype: 'diners'
+//         },
+//         {
+//             mask: '0000 0000 0000 0000',  // Format yang sama di sini
+//             regex: '^(5[1-5]\\d{0,2}|22[2-9]\\d{0,1}|2[3-7]\\d{0,2})\\d{0,12}',
+//             cardtype: 'mastercard'
+//         },
+//         {
+//             mask: '0000 0000 0000 0000',  // Format yang sama di sini
+//             regex: '^(?:2131|1800)\\d{0,11}',
+//             cardtype: 'jcb15'
+//         },
+//         {
+//             mask: '0000 0000 0000 0000',  // Format yang sama di sini
+//             regex: '^(?:35\\d{0,2})\\d{0,12}',
+//             cardtype: 'jcb'
+//         },
+//         {
+//             mask: '0000 0000 0000 0000',  // Format yang sama di sini
+//             regex: '^(?:5[0678]\\d{0,2}|6304|67\\d{0,2})\\d{0,12}',
+//             cardtype: 'maestro'
+//         },
+//         {
+//             mask: '0000 0000 0000 0000',  // Format yang sama di sini
+//             regex: '^4\\d{0,15}',
+//             cardtype: 'visa'
+//         },
+//         {
+//             mask: '0000 0000 0000 0000',  // Format yang sama di sini
+//             regex: '^62\\d{0,14}',
+//             cardtype: 'unionpay'
+//         },
+//         {
+//             mask: '0000 0000 0000 0000',  // Format yang sama di sini
+//             cardtype: 'Unknown'
+//         }
+//     ],
+//     dispatch: function (appended, dynamicMasked) {
+//         var number = (dynamicMasked.value + appended).replace(/\D/g, '');
 
-        for (var i = 0; i < dynamicMasked.compiledMasks.length; i++) {
-            let re = new RegExp(dynamicMasked.compiledMasks[i].regex);
-            if (number.match(re) != null) {
-                return dynamicMasked.compiledMasks[i];
-            }
-        }
-    }
-});
+//         for (var i = 0; i < dynamicMasked.compiledMasks.length; i++) {
+//             let re = new RegExp(dynamicMasked.compiledMasks[i].regex);
+//             if (number.match(re) != null) {
+//                 return dynamicMasked.compiledMasks[i];
+//             }
+//         }
+//     }
+// });
+
 
 //Mask the Expiration Date
 var expirationdate_mask = new IMask(expirationdate, {
@@ -157,8 +145,8 @@ document.querySelector('.creditcard').addEventListener('click', function () {
 //On Input Change Events
 name.addEventListener('input', function () {
     if (name.value.length == 0) {
-        document.getElementById('nameMember').innerHTML = 'John Doe';
-        document.getElementById('svgnameback').innerHTML = 'John Doe';
+        document.getElementById('nameMember').innerHTML = '';
+        document.getElementById('svgnameback').innerHTML = '';
     } else {
         document.getElementById('nameMember').innerHTML = this.value;
         document.getElementById('svgnameback').innerHTML = this.value;
@@ -168,23 +156,52 @@ name.addEventListener('input', function () {
 //On Input Change Events
 major.addEventListener('input', function () {
     if (major.value.length == 0) {
-        document.getElementById('nameMajor').innerHTML = 'John Doe';
+        document.getElementById('nameMajor').innerHTML = '';
      } else {
         document.getElementById('nameMajor').innerHTML = this.value;
      }
 });
 
+var cardnumber_mask = new IMask(cardnumber, {
+    mask: '0000000000000000', // Mask tanpa spasi untuk input
+});
+
+// Fungsi untuk memformat tampilan card number dengan spasi setiap 4 angka
+function formatCardNumber(value) {
+    let cleanValue = value.replace(/\D/g, '');
+    return cleanValue.replace(/(.{4})/g, '$1 ').trim();
+}
+
 cardnumber_mask.on('accept', function () {
     if (cardnumber_mask.value.length == 0) {
-        document.getElementById('nimNumber').innerHTML = '0123 4567 8910 1112';
+        document.getElementById('nimNumber').innerHTML = '';
     } else {
-        document.getElementById('nimNumber').innerHTML = cardnumber_mask.value;
+        // Tampilkan card number yang sudah diformat
+        document.getElementById('nimNumber').innerHTML = formatCardNumber(cardnumber_mask.value);
+    }
+});
+
+// Tambahkan event listener untuk class_code
+document.getElementById('class_code').addEventListener('input', function () {
+    let classCodeValue = this.value;
+
+    // Ambil nilai cardnumber yang sudah ada
+    let currentCardNumber = cardnumber_mask.value;
+
+    // Ambil 4 angka dari class_code, hapus 1 angka di depan
+    let formattedClassCode = classCodeValue.slice(1, 5); // Ambil 4 angka kedua sampai kelima dari class code
+
+    // Format card number dengan class code di depan
+    if (currentCardNumber.length > 0) {
+        document.getElementById('nimNumber').innerHTML = formatCardNumber(formattedClassCode + currentCardNumber);
+    } else {
+        document.getElementById('nimNumber').innerHTML = formatCardNumber(formattedClassCode);
     }
 });
 
 expirationdate_mask.on('accept', function () {
     if (expirationdate_mask.value.length == 0) {
-        document.getElementById('birthDate').innerHTML = '01/23';
+        document.getElementById('birthDate').innerHTML = '';
     } else {
         document.getElementById('birthDate').innerHTML = expirationdate_mask.value;
     }
@@ -192,7 +209,7 @@ expirationdate_mask.on('accept', function () {
 
 securitycode_mask.on('accept', function () {
     if (securitycode_mask.value.length == 0) {
-        document.getElementById('svgsecurity').innerHTML = '985';
+        document.getElementById('svgsecurity').innerHTML = '';
     } else {
         document.getElementById('svgsecurity').innerHTML = securitycode_mask.value;
     }
