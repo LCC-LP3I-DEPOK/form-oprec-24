@@ -1,4 +1,4 @@
- window.onload = function () {
+window.onload = function () {
 
 const name = document.getElementById('name');
 const major = document.getElementById('major');
@@ -16,70 +16,68 @@ const nimNumberDisplay = document.getElementById('nimNumber');
 let cctype = null;
 
 //Mask the Credit Card Number Input
-// var cardnumber_mask = new IMask(cardnumber, {
-//     mask: [
-//         {
-//             mask: '0000 0000 0000 0000',  // Format untuk semua mask, menggunakan 4 angka spasi
-//             regex: '^3[47]\\d{0,13}',
-//             cardtype: 'american express'
-//         },
-//         {
-//             mask: '0000 0000 0000 0000',  // Format yang sama di sini
-//             regex: '^(?:6011|65\\d{0,2}|64[4-9]\\d?)\\d{0,12}',
-//             cardtype: 'discover'
-//         },
-//         {
-//             mask: '0000 0000 0000 0000',  // Format yang sama di sini
-//             regex: '^3(?:0([0-5]|9)|[689]\\d?)\\d{0,11}',
-//             cardtype: 'diners'
-//         },
-//         {
-//             mask: '0000 0000 0000 0000',  // Format yang sama di sini
-//             regex: '^(5[1-5]\\d{0,2}|22[2-9]\\d{0,1}|2[3-7]\\d{0,2})\\d{0,12}',
-//             cardtype: 'mastercard'
-//         },
-//         {
-//             mask: '0000 0000 0000 0000',  // Format yang sama di sini
-//             regex: '^(?:2131|1800)\\d{0,11}',
-//             cardtype: 'jcb15'
-//         },
-//         {
-//             mask: '0000 0000 0000 0000',  // Format yang sama di sini
-//             regex: '^(?:35\\d{0,2})\\d{0,12}',
-//             cardtype: 'jcb'
-//         },
-//         {
-//             mask: '0000 0000 0000 0000',  // Format yang sama di sini
-//             regex: '^(?:5[0678]\\d{0,2}|6304|67\\d{0,2})\\d{0,12}',
-//             cardtype: 'maestro'
-//         },
-//         {
-//             mask: '0000 0000 0000 0000',  // Format yang sama di sini
-//             regex: '^4\\d{0,15}',
-//             cardtype: 'visa'
-//         },
-//         {
-//             mask: '0000 0000 0000 0000',  // Format yang sama di sini
-//             regex: '^62\\d{0,14}',
-//             cardtype: 'unionpay'
-//         },
-//         {
-//             mask: '0000 0000 0000 0000',  // Format yang sama di sini
-//             cardtype: 'Unknown'
-//         }
-//     ],
-//     dispatch: function (appended, dynamicMasked) {
-//         var number = (dynamicMasked.value + appended).replace(/\D/g, '');
-
-//         for (var i = 0; i < dynamicMasked.compiledMasks.length; i++) {
-//             let re = new RegExp(dynamicMasked.compiledMasks[i].regex);
-//             if (number.match(re) != null) {
-//                 return dynamicMasked.compiledMasks[i];
-//             }
-//         }
-//     }
-// });
-
+var cardnumber_mask = new IMask(cardnumber, {
+    mask: [
+        {
+            mask: '0000 0000 0000 0000',
+            regex: '^3[47]\\d{0,13}',
+            cardtype: 'american express'
+        },
+        {
+            mask: '0000 0000 0000 0000',
+            regex: '^(?:6011|65\\d{0,2}|64[4-9]\\d?)\\d{0,12}',
+            cardtype: 'discover'
+        },
+        {
+            mask: '0000 0000 0000 0000',
+            regex: '^3(?:0([0-5]|9)|[689]\\d?)\\d{0,11}',
+            cardtype: 'diners'
+        },
+        {
+            mask: '0000 0000 0000 0000',
+            regex: '^(5[1-5]\\d{0,2}|22[2-9]\\d{0,1}|2[3-7]\\d{0,2})\\d{0,12}',
+            cardtype: 'mastercard'
+        },
+        {
+            mask: '0000 0000 0000 0000',
+            regex: '^(?:2131|1800)\\d{0,11}',
+            cardtype: 'jcb15'
+        },
+        {
+            mask: '0000 0000 0000 0000',
+            regex: '^(?:35\\d{0,2})\\d{0,12}',
+            cardtype: 'jcb'
+        },
+        {
+            mask: '0000 0000 0000 0000',
+            regex: '^(?:5[0678]\\d{0,2}|6304|67\\d{0,2})\\d{0,12}',
+            cardtype: 'maestro'
+        },
+        {
+            mask: '0000 0000 0000 0000',
+            regex: '^4\\d{0,15}',
+            cardtype: 'visa'
+        },
+        {
+            mask: '0000 0000 0000 0000',
+            regex: '^62\\d{0,14}',
+            cardtype: 'unionpay'
+        },
+        {
+            mask: '0000 0000 0000 0000',
+            cardtype: 'Unknown'
+        }
+    ],
+    dispatch: function (appended, dynamicMasked) {
+        var number = (dynamicMasked.value + appended).replace(/\D/g, '');
+        for (var i = 0; i < dynamicMasked.compiledMasks.length; i++) {
+            let re = new RegExp(dynamicMasked.compiledMasks[i].regex);
+            if (number.match(re) != null) {
+                return dynamicMasked.compiledMasks[i];
+            }
+        }
+    }
+});
 
 //Mask the Expiration Date
 var expirationdate_mask = new IMask(expirationdate, {
@@ -162,41 +160,34 @@ major.addEventListener('input', function () {
      }
 });
 
-var cardnumber_mask = new IMask(cardnumber, {
-    mask: '0000000000000000', // Mask tanpa spasi untuk input
+classCode.addEventListener('input', function () {
+    // Ambil nilai dari cardnumber_mask tanpa spasi
+    let currentCardNumber = cardnumber_mask.value.replace(/\s/g, '');
+    let newClassCode = classCode.value;
+
+    // Pastikan hanya mengambil 4 karakter setelah menghapus angka pertama
+    let classCodePart = newClassCode.length >= 2 ? newClassCode.substring(1, 5) : '';
+
+    // Gabungkan class code dengan nomor kartu
+    let combinedCardNumber = classCodePart + currentCardNumber;
+
+    // Update elemen yang menunjukkan nomor kartu
+    nimNumberDisplay.innerHTML = combinedCardNumber.replace(/(\d{4})(?=\d)/g, '$1 '); // Format dengan spasi
 });
 
-// Fungsi untuk memformat tampilan card number dengan spasi setiap 4 angka
-function formatCardNumber(value) {
-    let cleanValue = value.replace(/\D/g, '');
-    return cleanValue.replace(/(.{4})/g, '$1 ').trim();
-}
-
+// Event listener untuk cardnumber_mask
 cardnumber_mask.on('accept', function () {
-    if (cardnumber_mask.value.length == 0) {
-        document.getElementById('nimNumber').innerHTML = '';
-    } else {
-        // Tampilkan card number yang sudah diformat
-        document.getElementById('nimNumber').innerHTML = formatCardNumber(cardnumber_mask.value);
-    }
-});
+    // Ambil nilai dari cardnumber_mask
+    let currentCardNumber = cardnumber_mask.value.replace(/\s/g, ''); // Menghapus spasi
 
-// Tambahkan event listener untuk class_code
-document.getElementById('class_code').addEventListener('input', function () {
-    let classCodeValue = this.value;
+    // Pastikan hanya mengambil 4 karakter setelah menghapus angka pertama
+    let classCodePart = classCode.value.length >= 2 ? classCode.value.substring(1, 5) : '';
 
-    // Ambil nilai cardnumber yang sudah ada
-    let currentCardNumber = cardnumber_mask.value;
+    // Gabungkan class code dengan nomor kartu
+    let combinedCardNumber = classCodePart + currentCardNumber;
 
-    // Ambil 4 angka dari class_code, hapus 1 angka di depan
-    let formattedClassCode = classCodeValue.slice(1, 5); // Ambil 4 angka kedua sampai kelima dari class code
-
-    // Format card number dengan class code di depan
-    if (currentCardNumber.length > 0) {
-        document.getElementById('nimNumber').innerHTML = formatCardNumber(formattedClassCode + currentCardNumber);
-    } else {
-        document.getElementById('nimNumber').innerHTML = formatCardNumber(formattedClassCode);
-    }
+    // Update tampilan nimNumber
+    nimNumberDisplay.innerHTML = combinedCardNumber.replace(/(\d{4})(?=\d)/g, '$1 '); // Format dengan spasi
 });
 
 expirationdate_mask.on('accept', function () {
