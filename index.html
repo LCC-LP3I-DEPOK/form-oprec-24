@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Kartu Tanda Anggota UKM LCC 2024/2025
+    <title>Pendaftaran Anggota Kepengurusan UKM LCC 2024/2025
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -15,7 +15,7 @@
 
 <body class="bg-slate-100 mx-10">
 
-    <div id="popup" class="z-50 fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
+    <div id="popup" class="z-50 fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden shadow-xl">
         <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm text-center">
             <h2 class="text-xl font-bold mb-4">Selamat Datang!</h2>
             <p class="mb-4">Unit Kegiatan Mahasiswa LP3I Computer Club (LCC) membuka Pendaftaran Anggota untuk generasi 2024/2025</p>
@@ -24,24 +24,26 @@
                 <p class="mb-4">Ayo daftarkan diri kamu dengan mengisi form setelah ini segera-!!</p>
 
                 <div class="mb-4">
-                    <p>Contact Person : </p>
-                    <p>085819727856 (Alfiansyah)</p>
+                    <p class="font-bold">Contact Person : </p>
+                    <p>0812 9672 9071 (M Ramdan)</p>
                 </div>
+                
+                <a href="https://www.instagram.com/lcc.lp3idepok?igsh=MTZxbmU4eXllZGl5aA==" class="block mb-4 font-bold underline underline-offset-4">
+                    Instagram @lcc.lp3idepok
+                </a>
 
-                <p class="mb-4">Instagram @lcc.lp3idepok</p>
-
-            <button onclick="closePopup()" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Tutup</button>
+            <button onclick="closePopup()" class="bg-sky-800 font-bold text-white px-4 py-2 rounded-lg">Tutup</button>
         </div>
     </div>
 
 
     <div class="font-bold text-xl md:text-3xl text-center mt-10">
-        <h1>Kartu Tanda Anggota UKM LCC 2024/2025
+        <h1>Pendaftaran Anggota UKM LCC 2024/2025
         </h1>
     </div>
     <div class="w-full max-w-sm mx-auto max-h-[251px] h-[54vw] p-5 preload z-10">
         <div
-            class="creditcard w-full max-w-[400px] transform preserve-3d transition-transform duration-600 cursor-pointer">
+            class="creditcard w-full max-w-[400px] transform preserve-3d transition-transform duration-600 cursor-pointer ">
             <div class="absolute w-full max-w-[400px] backface-hidden antialiased text-[#47525d]">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
                     y="0px" viewBox="0 0 750 471" style="enable-background:new 0 0 750 471;" xml:space="preserve">
@@ -147,26 +149,26 @@
     </div>
 
     <div class="max-w-md mx-auto p-4 bg-white shadow-md rounded-lg my-5">
-        <form id="form" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfuqo9FRrUJzqz-s77YjQWE3jdW16klq29urfEUf957qMG5-A/formResponse" method="POST">
+        <form enctype="multipart/form-data" id="form" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfuqo9FRrUJzqz-s77YjQWE3jdW16klq29urfEUf957qMG5-A/formResponse" method="POST">
             <!-- Step 1 Form -->
             <div id="step1" class="step">
                 <div class="grid grid-cols-2 gap-5">
                     <div class="mb-4">
-                        <label for="cardnumber" class="block text-sm font-medium text-gray-700">NIM</label>
+                        <label for="cardnumber" class="block text-sm font-bold text-gray-700">NIM</label>
                         <input id="cardnumber" name="entry.400299606" type="text" inputmode="numeric"
-                            class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-                            placeholder="NIM">
+                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
+                        placeholder="NIM">
                     </div>
         
                     <div class="mb-4">
-                        <label for="name" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
+                        <label for="name" class="block text-sm font-bold text-gray-700">Nama Lengkap</label>
                         <input id="name" maxlength="20" type="text" name="entry.140731060"
-                            class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-                            placeholder="Nama Lengkap">
+                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
+                        placeholder="Nama Lengkap">
                     </div>
         
                     <div class="mb-4">
-                        <label for="major" class="block text-sm font-medium text-gray-700">Jurusan</label>
+                        <label for="major" class="block text-sm font-bold text-gray-700">Jurusan</label>
                         <select id="major" name="entry.1578068203"
                             class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300">
                             <option value="">Pilih Jurusan</option>
@@ -180,7 +182,7 @@
                     </div>
         
                     <div class="mb-4">
-                        <label for="class_code" class="block text-sm font-medium text-gray-700">Kode Kelas</label>
+                        <label for="class_code" class="block text-sm font-bold text-gray-700">Kode Kelas</label>
                         <select id="class_code" name="entry.114516170"
                             class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300">
                             <option value="">-- Pilih --</option>
@@ -200,21 +202,21 @@
                 <!-- Field untuk Step 2 -->
                 <div class="grid grid-cols-2 gap-5 mt-4">
                     <div class="mb-4">
-                        <label for="" class="block text-sm font-medium text-gray-700">Tahun Lahir</label>
+                        <label for="" class="block text-sm font-bold text-gray-700">Tahun Lahir</label>
                         <input id="securitycode" type="text" inputmode="numeric"
                             class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-                            placeholder="YYYY">
+                            placeholder="YYYY" autocomplete="off">
                     </div>
         
                     <div class="mb-4">
-                        <label for="expirationdate" class="block text-sm font-medium text-gray-700">Tgl/Bulan Lahir</label>
+                        <label for="expirationdate" class="block text-sm font-bold text-gray-700">Tgl/Bulan Lahir</label>
                         <input id="expirationdate" type="text" inputmode="numeric"
                             class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-                            placeholder="DD/MM">
+                            placeholder="DD/MM" autocomplete="off">
                     </div>
         
                     <div class="mb-4">
-                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                        <label for="email" class="block text-sm font-bold text-gray-700">Email</label>
                         <input id="email" name="entry.633927820" type="email" 
                             class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
                             placeholder="Alamat Email">
@@ -222,35 +224,46 @@
                     
         
                     <div class="mb-4">
-                        <label for="whatsapp" class="block text-sm font-medium text-gray-700">No. Whatsapp</label>
+                        <label for="whatsapp" class="block text-sm font-bold text-gray-700">No. Whatsapp</label>
                         <input id="whatsapp" type="number" name="entry.555009853"
-                            class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-                            placeholder="No. Whatsapp">
+                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
+                        placeholder="No. Whatsapp">
                     </div>
                 </div>
             </div>
             <div id="step3" class="step hidden">
                 <!-- Field untuk Step 3 -->
                 <div class="mb-4">
-                    <label for="join_reason" class="block text-sm font-medium text-gray-700">Alasan Bergabung</label>
+                    <label for="join_reason" class="block text-sm font-bold text-gray-700">Alasan Bergabung</label>
                     <textarea id="join_reason" rows="4" name="entry.1495793965"
                         class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-                        placeholder="Ceritakan alasan Anda ingin bergabung"></textarea>
+                        placeholder="Ceritakan Alasan Kamu Ingin Bergabung"></textarea>
                 </div>
                 
                 <div class="mb-4">
-                    <label for="join_expectation" class="block text-sm font-medium text-gray-700">Harapan Bergabung</label>
+                    <label for="join_expectation" class="block text-sm font-bold text-gray-700">Harapan Bergabung</label>
                     <textarea id="join_expectation" rows="4" name="entry.376906073"
                         class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-                        placeholder="Ceritakan harapan Anda setelah bergabung"></textarea>
+                        placeholder="Ceritakan Harapan Kamu Setelah Bergabung"></textarea>
                 </div>
                 
+            </div>       
+            <!-- Step 4 Form -->
+<div id="step4" class="step hidden">
+    <p class="text-center mb-4">Follow Akun Instagram UKM LCC Untuk Kebutuhan Update Mengenai OPREC LCC 2024/2025</p>
+    <p class="text-center mb-4">Setelah Follow, Silahakan Kembali Lagi Kesini Ya</p>
+</div>
+
+            <div id="step5" class="step hidden">
+                <div class="text-center">
+                    <h2 class="text-xl font-bold">Terima Kasih!</h2>
+                    <p>Data Kamu Telah Kami Terima. Klik Tombol di Bawah Ini Untuk Mengirimkan Data.</p>
+                </div>
             </div>
-        
             <!-- Tombol Navigasi -->
             <div class="flex justify-between mt-4">
-                <button id="prevBtn" onclick="nextPrev(-1); return false;" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hidden">Kembali</button>
-                <button id="nextBtn" onclick="nextStep(event)" class="bg-blue-500 text-white px-4 py-2 rounded-md">Lanjut</button>
+                <button id="prevBtn" onclick="nextPrev(-1); return false;" class="bg-gray-300 font-bold ccicon px-4 py-2 rounded-md hidden">Kembali</button>
+                <button id="nextBtn" onclick="nextStep(event)" class="bg-sky-800 text-white px-4 py-2 font-bold rounded-md">Lanjut</button>
             </div>
         </form>
         
@@ -258,40 +271,34 @@
 
           <script src='https://cdnjs.cloudflare.com/ajax/libs/imask/3.4.0/imask.min.js'> </script>
           <script src="./script.js"></script>
-        <script>
-
-                  // Tampilkan popup saat halaman pertama kali dimuat
-      window.addEventListener('load', function() {
-          document.getElementById('popup').classList.remove('hidden');
-      });
-  
-      // Fungsi untuk menutup popup
-      function closePopup() {
-          document.getElementById('popup').classList.add('hidden');
-      }
-
-            let currentStep = 0;
-            showStep(currentStep);
+    
+          <script>
+            let currentStep = 0; // Menyimpan indeks langkah saat ini
         
-            function showStep(step) {
-                const steps = document.getElementsByClassName("step");
-                for (let i = 0; i < steps.length; i++) {
-                    steps[i].classList.add("hidden");
+            // Tampilkan popup saat halaman pertama kali dimuat
+            document.addEventListener("DOMContentLoaded", function() {
+                const completedStep4 = localStorage.getItem("completedStep4");
+                
+                // Tampilkan popup jika berada di langkah pertama
+                if (currentStep === 0) {
+                    document.getElementById('popup').classList.remove('hidden');
                 }
-                steps[step].classList.remove("hidden");
         
-                // Update visibilitas tombol
-                document.getElementById("prevBtn").style.display = step === 0 ? "none" : "inline";
-        
-                // Update teks dan tipe tombol lanjut
-                const nextBtn = document.getElementById("nextBtn");
-                if (step === steps.length - 1) {
-                    nextBtn.textContent = "Submit";
-                    nextBtn.type = "submit"; // Mengubah type ke submit hanya di tahap terakhir
+                // Cek jika sudah menyelesaikan Step 4
+                if (completedStep4 === "true") {
+                    // Tampilkan Step 5
+                    currentStep = 4; // Langsung ke Step 5
+                    showStep(currentStep);
+                    localStorage.removeItem("completedStep4"); // Hapus status setelah digunakan
                 } else {
-                    nextBtn.textContent = "Lanjut";
-                    nextBtn.type = "button"; // Mengubah type kembali ke button
+                    // Tampilkan langkah pertama jika belum menyelesaikan langkah 4
+                    showStep(currentStep);
                 }
+            });
+        
+            // Fungsi untuk menutup popup
+            function closePopup() {
+                document.getElementById('popup').classList.add('hidden');
             }
         
             function nextStep(event) {
@@ -299,12 +306,27 @@
         
                 // Jika ini adalah langkah terakhir, izinkan submit
                 if (currentStep === steps.length - 1) {
-                    return true; // Tidak mencegah submit
-                } else {
-                    // Jika bukan, cegah submit dan lanjutkan ke step berikutnya
-                    event.preventDefault();
-                    nextPrev(1);
+                    // Lakukan pengiriman data di sini
+                    alert("Data berhasil dikirim!"); // Ganti dengan pengiriman data yang sesuai
+                    return true; // Mengizinkan submit
                 }
+        
+                // Cegah submit pada langkah-langkah sebelumnya
+                event.preventDefault();
+        
+                // Cek jika kita di langkah keempat
+                if (currentStep === 3) {
+                    // Simpan status di localStorage
+                    localStorage.setItem("completedStep4", "true");
+                    
+                    // Alihkan ke Instagram
+                    setTimeout(function() {
+                        window.location.href = "https://www.instagram.com/lcc.lp3idepok?igsh=MTZxbmU4eXllZGl5aA==";
+                    }, 2000); // Alihkan setelah 2 detik
+                    return; // Keluar dari fungsi
+                }
+        
+                nextPrev(1); // Pindah ke langkah berikutnya
             }
         
             function nextPrev(n) {
@@ -323,11 +345,30 @@
         
                 showStep(currentStep);
             }
+        
+            // Fungsi untuk menampilkan step yang sesuai
+            function showStep(step) {
+                const steps = document.getElementsByClassName("step");
+                for (let i = 0; i < steps.length; i++) {
+                    steps[i].classList.add("hidden"); // Sembunyikan semua langkah
+                }
+                steps[step].classList.remove("hidden"); // Tampilkan langkah yang sesuai
+                
+                // Tampilkan popup jika berada di langkah pertama
+                if (step === 0) {
+                    document.getElementById('popup').classList.remove('hidden');
+                } else {
+                    document.getElementById('popup').classList.add('hidden'); // Sembunyikan popup di langkah lainnya
+                }
+            }
         </script>
         
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        
+                        
 </body>
 
 </html>
  
+
+<!-- ,[1765790145,"Bukti Follow",null,13,[[1697723444,null,0]] -->
