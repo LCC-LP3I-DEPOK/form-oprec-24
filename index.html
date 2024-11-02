@@ -324,16 +324,14 @@
                     // Simpan status di localStorage
                     localStorage.setItem("completedStep4", "true");
         
-                    // Pindah ke Step 5 setelah 5 detik
-                    setTimeout(function() {
-                        currentStep = 4; // Pindah ke Step 5
-                        showStep(currentStep); // Tampilkan Step 5
+                    // Pindah langsung ke Step 5 dan alihkan ke Instagram
+                    currentStep = 4; // Langsung pindah ke Step 5
+                    showStep(currentStep); // Tampilkan Step 5
         
-                        // Alihkan ke Instagram setelah pindah ke Step 5
-                        setTimeout(function() {
-                            window.location.href = "https://www.instagram.com/lcc.lp3idepok?igsh=MTZxbmU4eXllZGl5aA==";
-                        }, 2000); // Alihkan ke Instagram setelah 2 detik
-                    }, 3000); // Ganti 5000 dengan 5 detik
+                    // Alihkan ke Instagram
+                    setTimeout(function() {
+                        window.location.href = "https://www.instagram.com/lcc.lp3idepok?igsh=MTZxbmU4eXllZGl5aA==";
+                    }, 500); // Alihkan setelah 2 detik
                     return; // Keluar dari fungsi
                 }
         
