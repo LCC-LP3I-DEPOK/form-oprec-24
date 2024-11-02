@@ -271,18 +271,13 @@
 
           <script src='https://cdnjs.cloudflare.com/ajax/libs/imask/3.4.0/imask.min.js'> </script>
           <script src="./script.js"></script>
-    
           <script>
             let currentStep = 0; // Menyimpan indeks langkah saat ini
         
             // Tampilkan popup saat halaman pertama kali dimuat
             document.addEventListener("DOMContentLoaded", function() {
                 const completedStep4 = localStorage.getItem("completedStep4");
-                
-                // Tampilkan popup jika berada di langkah pertama
-                if (currentStep === 0) {
-                    document.getElementById('popup').classList.remove('hidden');
-                }
+                const savedStep = localStorage.getItem("currentStep");
         
                 // Cek jika sudah menyelesaikan Step 4
                 if (completedStep4 === "true") {
@@ -290,9 +285,18 @@
                     currentStep = 4; // Langsung ke Step 5
                     showStep(currentStep);
                     localStorage.removeItem("completedStep4"); // Hapus status setelah digunakan
+                } else if (savedStep) {
+                    // Muat langkah yang disimpan di localStorage
+                    currentStep = parseInt(savedStep, 10);
+                    showStep(currentStep);
                 } else {
                     // Tampilkan langkah pertama jika belum menyelesaikan langkah 4
                     showStep(currentStep);
+                }
+        
+                // Tampilkan popup jika berada di langkah pertama
+                if (currentStep === 0) {
+                    document.getElementById('popup').classList.remove('hidden');
                 }
             });
         
@@ -318,7 +322,7 @@
                 if (currentStep === 3) {
                     // Simpan status di localStorage
                     localStorage.setItem("completedStep4", "true");
-                    
+        
                     // Alihkan ke Instagram
                     setTimeout(function() {
                         window.location.href = "https://www.instagram.com/lcc.lp3idepok?igsh=MTZxbmU4eXllZGl5aA==";
@@ -326,6 +330,8 @@
                     return; // Keluar dari fungsi
                 }
         
+                // Simpan langkah saat ini di localStorage
+                localStorage.setItem("currentStep", currentStep);
                 nextPrev(1); // Pindah ke langkah berikutnya
             }
         
@@ -343,6 +349,8 @@
                     currentStep = 0;
                 }
         
+                // Simpan langkah saat ini di localStorage
+                localStorage.setItem("currentStep", currentStep);
                 showStep(currentStep);
             }
         
@@ -364,6 +372,7 @@
         </script>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        
         
                         
 </body>
