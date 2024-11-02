@@ -251,7 +251,7 @@
             <!-- Step 4 Form -->
 <div id="step4" class="step hidden">
     <p class="text-center mb-4">Follow Akun Instagram UKM LCC Untuk Kebutuhan Update Mengenai OPREC LCC 2024/2025</p>
-    <p class="text-center mb-4">Setelah Follow, Silahakan Kembali Lagi Kesini Ya</p>
+    <p class="text-center mb-4">Setelah Follow, Silahkan Kembali Lagi Kesini Ya</p>
 </div>
 
             <div id="step5" class="step hidden">
@@ -271,32 +271,25 @@
 
           <script src='https://cdnjs.cloudflare.com/ajax/libs/imask/3.4.0/imask.min.js'> </script>
           <script src="./script.js"></script>
+      
           <script>
             let currentStep = 0; // Menyimpan indeks langkah saat ini
         
             // Tampilkan popup saat halaman pertama kali dimuat
             document.addEventListener("DOMContentLoaded", function() {
                 const completedStep4 = localStorage.getItem("completedStep4");
-                const savedStep = localStorage.getItem("currentStep");
         
                 // Cek jika sudah menyelesaikan Step 4
                 if (completedStep4 === "true") {
-                    // Tampilkan Step 5
+                    // Set langkah ke Step 5
                     currentStep = 4; // Langsung ke Step 5
                     showStep(currentStep);
                     localStorage.removeItem("completedStep4"); // Hapus status setelah digunakan
-                } else if (savedStep) {
-                    // Muat langkah yang disimpan di localStorage
-                    currentStep = parseInt(savedStep, 10);
-                    showStep(currentStep);
                 } else {
-                    // Tampilkan langkah pertama jika belum menyelesaikan langkah 4
+                    // Set langkah awal ke Step 1 jika tidak ada data di localStorage
+                    currentStep = 0;
                     showStep(currentStep);
-                }
-        
-                // Tampilkan popup jika berada di langkah pertama
-                if (currentStep === 0) {
-                    document.getElementById('popup').classList.remove('hidden');
+                    document.getElementById('popup').classList.remove('hidden'); // Tampilkan popup di langkah pertama
                 }
             });
         
@@ -312,6 +305,14 @@
                 if (currentStep === steps.length - 1) {
                     // Lakukan pengiriman data di sini
                     alert("Data berhasil dikirim!"); // Ganti dengan pengiriman data yang sesuai
+        
+                    // Hapus semua status dari localStorage setelah submit
+                    localStorage.removeItem("completedStep4");
+                    localStorage.removeItem("currentStep");
+        
+                    // Mengalihkan ke langkah pertama setelah submit
+                    currentStep = 0;
+                    showStep(currentStep);
                     return true; // Mengizinkan submit
                 }
         
@@ -330,8 +331,6 @@
                     return; // Keluar dari fungsi
                 }
         
-                // Simpan langkah saat ini di localStorage
-                localStorage.setItem("currentStep", currentStep);
                 nextPrev(1); // Pindah ke langkah berikutnya
             }
         
@@ -349,8 +348,6 @@
                     currentStep = 0;
                 }
         
-                // Simpan langkah saat ini di localStorage
-                localStorage.setItem("currentStep", currentStep);
                 showStep(currentStep);
             }
         
@@ -372,6 +369,9 @@
         </script>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                
         
         
                         
