@@ -272,110 +272,108 @@
           <script src='https://cdnjs.cloudflare.com/ajax/libs/imask/3.4.0/imask.min.js'> </script>
           <script src="./script.js"></script>
       
-      <script>
-    let currentStep = 0; // Menyimpan indeks langkah saat ini
-
-    // Tampilkan popup saat halaman pertama kali dimuat
-    document.addEventListener("DOMContentLoaded", function() {
-        const completedStep4 = localStorage.getItem("completedStep4");
-
-        // Cek jika sudah menyelesaikan Step 4
-        if (completedStep4 === "true") {
-            // Set langkah ke Step 5
-            currentStep = 4; // Langsung ke Step 5
-            showStep(currentStep);
-            localStorage.removeItem("completedStep4"); // Hapus status setelah digunakan
-        } else {
-            // Set langkah awal ke Step 1 jika tidak ada data di localStorage
-            currentStep = 0;
-            showStep(currentStep);
-            document.getElementById('popup').classList.remove('hidden'); // Tampilkan popup di langkah pertama
-        }
-    });
-
-    // Fungsi untuk menutup popup
-    function closePopup() {
-        document.getElementById('popup').classList.add('hidden');
-    }
-
-    function nextStep(event) {
-        const steps = document.getElementsByClassName("step");
-
-        // Jika ini adalah langkah terakhir, izinkan submit
-        if (currentStep === steps.length - 1) {
-            // Lakukan pengiriman data di sini
-            alert("Data berhasil dikirim!"); // Ganti dengan pengiriman data yang sesuai
-
-            // Hapus semua status dari localStorage setelah submit
-            localStorage.removeItem("completedStep4");
-            localStorage.removeItem("currentStep");
-
-            // Mengalihkan ke langkah pertama setelah submit
-            currentStep = 0;
-            showStep(currentStep);
-            return true; // Mengizinkan submit
-        }
-
-        // Cegah submit pada langkah-langkah sebelumnya
-        event.preventDefault();
-
-        // Cek jika kita di langkah keempat
-        if (currentStep === 3) {
-            // Simpan status di localStorage
-            localStorage.setItem("completedStep4", "true");
-
-            // Alihkan ke Instagram
-            setTimeout(function() {
-                window.location.href = "https://www.instagram.com/lcc.lp3idepok?igsh=MTZxbmU4eXllZGl5aA==";
-            }, 2000); // Alihkan setelah 2 detik
-            return; // Keluar dari fungsi
-        }
-
-        nextPrev(1); // Pindah ke langkah berikutnya
-    }
-
-    function nextPrev(n) {
-        const steps = document.getElementsByClassName("step");
-
-        // Sembunyikan step saat ini
-        steps[currentStep].classList.add("hidden");
-        currentStep += n;
-
-        // Pastikan step tetap dalam rentang yang valid
-        if (currentStep >= steps.length) {
-            currentStep = steps.length - 1;
-        } else if (currentStep < 0) {
-            currentStep = 0;
-        }
-
-        showStep(currentStep);
-
-        // Jika pindah dari Step 4, set delay untuk pindah ke Step 5
-        if (currentStep === 4) {
-            setTimeout(function() {
-                currentStep = 5; // Pindah ke Step 5
-                showStep(currentStep);
-            }, 5000); // Ganti 5000 dengan 5 detik
-        }
-    }
-
-    // Fungsi untuk menampilkan step yang sesuai
-    function showStep(step) {
-        const steps = document.getElementsByClassName("step");
-        for (let i = 0; i < steps.length; i++) {
-            steps[i].classList.add("hidden"); // Sembunyikan semua langkah
-        }
-        steps[step].classList.remove("hidden"); // Tampilkan langkah yang sesuai
+          <script>
+            let currentStep = 0; // Menyimpan indeks langkah saat ini
         
-        // Tampilkan popup jika berada di langkah pertama
-        if (step === 0) {
-            document.getElementById('popup').classList.remove('hidden');
-        } else {
-            document.getElementById('popup').classList.add('hidden'); // Sembunyikan popup di langkah lainnya
-        }
-    }
-</script>
-
+            // Tampilkan popup saat halaman pertama kali dimuat
+            document.addEventListener("DOMContentLoaded", function() {
+                const completedStep4 = localStorage.getItem("completedStep4");
+        
+                // Cek jika sudah menyelesaikan Step 4
+                if (completedStep4 === "true") {
+                    // Set langkah ke Step 5
+                    currentStep = 4; // Langsung ke Step 5
+                    showStep(currentStep);
+                    localStorage.removeItem("completedStep4"); // Hapus status setelah digunakan
+                } else {
+                    // Set langkah awal ke Step 1 jika tidak ada data di localStorage
+                    currentStep = 0;
+                    showStep(currentStep);
+                    document.getElementById('popup').classList.remove('hidden'); // Tampilkan popup di langkah pertama
+                }
+            });
+        
+            // Fungsi untuk menutup popup
+            function closePopup() {
+                document.getElementById('popup').classList.add('hidden');
+            }
+        
+            function nextStep(event) {
+                const steps = document.getElementsByClassName("step");
+        
+                // Jika ini adalah langkah terakhir, izinkan submit
+                if (currentStep === steps.length - 1) {
+                    // Lakukan pengiriman data di sini
+                    alert("Data berhasil dikirim!"); // Ganti dengan pengiriman data yang sesuai
+        
+                    // Hapus semua status dari localStorage setelah submit
+                    localStorage.removeItem("completedStep4");
+                    localStorage.removeItem("currentStep");
+        
+                    // Mengalihkan ke langkah pertama setelah submit
+                    currentStep = 0;
+                    showStep(currentStep);
+                    return true; // Mengizinkan submit
+                }
+        
+                // Cegah submit pada langkah-langkah sebelumnya
+                event.preventDefault();
+        
+                // Cek jika kita di langkah keempat
+                if (currentStep === 3) {
+                    // Simpan status di localStorage
+                    localStorage.setItem("completedStep4", "true");
+        
+                    // Pindah ke Step 5 setelah 5 detik
+                    setTimeout(function() {
+                        currentStep = 4; // Pindah ke Step 5
+                        showStep(currentStep); // Tampilkan Step 5
+        
+                        // Alihkan ke Instagram setelah pindah ke Step 5
+                        setTimeout(function() {
+                            window.location.href = "https://www.instagram.com/lcc.lp3idepok?igsh=MTZxbmU4eXllZGl5aA==";
+                        }, 2000); // Alihkan ke Instagram setelah 2 detik
+                    }, 3000); // Ganti 5000 dengan 5 detik
+                    return; // Keluar dari fungsi
+                }
+        
+                nextPrev(1); // Pindah ke langkah berikutnya
+            }
+        
+            function nextPrev(n) {
+                const steps = document.getElementsByClassName("step");
+        
+                // Sembunyikan step saat ini
+                steps[currentStep].classList.add("hidden");
+                currentStep += n;
+        
+                // Pastikan step tetap dalam rentang yang valid
+                if (currentStep >= steps.length) {
+                    currentStep = steps.length - 1;
+                } else if (currentStep < 0) {
+                    currentStep = 0;
+                }
+        
+                showStep(currentStep);
+            }
+        
+            // Fungsi untuk menampilkan step yang sesuai
+            function showStep(step) {
+                const steps = document.getElementsByClassName("step");
+                for (let i = 0; i < steps.length; i++) {
+                    steps[i].classList.add("hidden"); // Sembunyikan semua langkah
+                }
+                steps[step].classList.remove("hidden"); // Tampilkan langkah yang sesuai
+                
+                // Tampilkan popup jika berada di langkah pertama
+                if (step === 0) {
+                    document.getElementById('popup').classList.remove('hidden');
+                } else {
+                    document.getElementById('popup').classList.add('hidden'); // Sembunyikan popup di langkah lainnya
+                }
+            }
+        </script>
+        
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
                 
