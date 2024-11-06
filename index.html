@@ -155,21 +155,21 @@
                 <div class="grid grid-cols-2 gap-5">
                     <div class="mb-4">
                         <label for="cardnumber" class="block text-sm font-bold text-gray-700">NIM</label>
-                        <input id="cardnumber" name="entry.400299606" type="text" inputmode="numeric"
+                        <input required id="cardnumber" name="entry.400299606" type="text" inputmode="numeric"
                         class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
                         placeholder="NIM">
                     </div>
         
                     <div class="mb-4">
                         <label for="name" class="block text-sm font-bold text-gray-700">Nama Lengkap</label>
-                        <input id="name" maxlength="20" type="text" name="entry.140731060"
+                        <input required id="name" maxlength="20" type="text" name="entry.140731060"
                         class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
                         placeholder="Nama Lengkap">
                     </div>
         
                     <div class="mb-4">
                         <label for="major" class="block text-sm font-bold text-gray-700">Jurusan</label>
-                        <select id="major" name="entry.1578068203"
+                        <select required id="major" name="entry.1578068203"
                             class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300">
                             <option value="">Pilih Jurusan</option>
                             <option value="Manajemen Informatika">Manajemen Informatika</option>
@@ -183,7 +183,7 @@
         
                     <div class="mb-4">
                         <label for="class_code" class="block text-sm font-bold text-gray-700">Kode Kelas</label>
-                        <select id="class_code" name="entry.114516170"
+                        <select required id="class_code" name="entry.114516170"
                             class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300">
                             <option value="">-- Pilih --</option>
                             <option value="18111">18111</option>
@@ -210,21 +210,21 @@
                 <div class="grid grid-cols-2 gap-5 mt-4">
                     <div class="mb-4">
                         <label for="" class="block text-sm font-bold text-gray-700">Tahun Lahir</label>
-                        <input id="securitycode" type="text" inputmode="numeric"
+                        <input required id="securitycode" type="text" inputmode="numeric"
                             class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
                             placeholder="YYYY" autocomplete="off">
                     </div>
         
                     <div class="mb-4">
                         <label for="expirationdate" class="block text-sm font-bold text-gray-700">Tgl/Bulan Lahir</label>
-                        <input id="expirationdate" type="text" inputmode="numeric"
+                        <input required id="expirationdate" type="text" inputmode="numeric"
                             class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
                             placeholder="DD/MM" autocomplete="off">
                     </div>
         
                     <div class="mb-4">
                         <label for="email" class="block text-sm font-bold text-gray-700">Email</label>
-                        <input id="email" name="entry.633927820" type="email" 
+                        <input required id="email" name="entry.633927820" type="email" 
                             class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
                             placeholder="Alamat Email">
                     </div>
@@ -232,7 +232,7 @@
         
                     <div class="mb-4">
                         <label for="whatsapp" class="block text-sm font-bold text-gray-700">No. Whatsapp</label>
-                        <input id="whatsapp" type="number" name="entry.555009853"
+                        <input required id="whatsapp" type="number" name="entry.555009853"
                         class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
                         placeholder="No. Whatsapp">
                     </div>
@@ -242,14 +242,14 @@
                 <!-- Field untuk Step 3 -->
                 <div class="mb-4">
                     <label for="join_reason" class="block text-sm font-bold text-gray-700">Alasan Bergabung</label>
-                    <textarea id="join_reason" rows="4" name="entry.1495793965"
+                    <textarea required id="join_reason" rows="4" name="entry.1495793965"
                         class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
                         placeholder="Ceritakan Alasan Kamu Ingin Bergabung"></textarea>
                 </div>
                 
                 <div class="mb-4">
                     <label for="join_expectation" class="block text-sm font-bold text-gray-700">Harapan Bergabung</label>
-                    <textarea id="join_expectation" rows="4" name="entry.376906073"
+                    <textarea required id="join_expectation" rows="4" name="entry.376906073"
                         class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
                         placeholder="Ceritakan Harapan Kamu Setelah Bergabung"></textarea>
                 </div>
@@ -334,33 +334,52 @@
         nextPrev(1);
     }
 
-    function nextPrev(n) {
-        const steps = document.getElementsByClassName("step");
-        steps[currentStep].classList.add("hidden");
-        currentStep += n;
+    function nextStep(event) {
+    const steps = document.getElementsByClassName("step");
 
-        if (currentStep >= steps.length) {
-            currentStep = steps.length - 1;
-        } else if (currentStep < 0) {
-            currentStep = 0;
-        }
-
-        showStep(currentStep);
-    }
-
-    function showStep(step) {
-        const steps = document.getElementsByClassName("step");
-        for (let i = 0; i < steps.length; i++) {
-            steps[i].classList.add("hidden");
-        }
-        steps[step].classList.remove("hidden");
-
-        if (step === 0) {
-            document.getElementById('popup').classList.remove('hidden');
+    // Cek apakah semua field pada step saat ini sudah diisi
+    const currentFields = steps[currentStep].querySelectorAll("input[required]");
+    let allFilled = true;
+    
+    currentFields.forEach(field => {
+        if (!field.value) {
+            allFilled = false;
+            field.classList.add('border-red-500'); // Tambahkan indikator jika field belum diisi
         } else {
-            document.getElementById('popup').classList.add('hidden');
+            field.classList.remove('border-red-500');
         }
+    });
+
+    if (!allFilled) {
+        alert("Harap isi semua field sebelum melanjutkan.");
+        return; // Hentikan proses jika ada field yang belum diisi
     }
+
+    if (currentStep === steps.length - 1) {
+        alert("Data berhasil dikirim!");
+        localStorage.removeItem("completedStep4");
+        localStorage.removeItem("currentStep");
+        currentStep = 0;
+        showStep(currentStep);
+        return true;
+    }
+
+    event.preventDefault();
+
+    if (currentStep === 3) {
+        localStorage.setItem("completedStep4", "true");
+        currentStep = 4;
+        showStep(currentStep);
+
+        setTimeout(function() {
+            window.location.href = "https://www.instagram.com/lcc.lp3idepok?igsh=MTZxbmU4eXllZGl5aA==";
+        }, 500);
+        return;
+    }
+
+    nextPrev(1);
+}
+
 </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
