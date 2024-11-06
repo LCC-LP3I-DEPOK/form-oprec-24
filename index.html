@@ -268,7 +268,7 @@
 <script src="./script.js"></script>
 
  <script>
-let currentStep = 0; // Menyimpan indeks langkah saat ini
+ let currentStep = 0; // Menyimpan indeks langkah saat ini
 
 document.addEventListener("DOMContentLoaded", function() {
     const completedStep4 = localStorage.getItem("completedStep4");
@@ -327,7 +327,6 @@ function nextStep(event) {
         localStorage.setItem("completedStep4", "true");
 
         // Kirim data atau lakukan aksi lain sebelum melanjutkan
-        // Pastikan data sudah dikirimkan atau diproses sebelum lanjut ke step 4
         setTimeout(function() {
             // Setelah mengirim data, lanjutkan ke step berikutnya (step 4)
             currentStep = 4;
@@ -345,6 +344,29 @@ function nextStep(event) {
 
 function nextPrev(n) {
     const steps = document.getElementsByClassName("step");
+    
+    // Jika user berada di step 3 dan ada field yang belum diisi, langsung balik ke step 1
+    if (n === 1 && currentStep === 3) {
+        const currentFields = steps[currentStep].querySelectorAll("input[required]");
+        let allFilled = true;
+
+        currentFields.forEach(field => {
+            if (!field.value) {
+                allFilled = false;
+                field.classList.add('border-red-500'); // Tambahkan indikator jika field belum diisi
+            } else {
+                field.classList.remove('border-red-500');
+            }
+        });
+
+        if (!allFilled) {
+            alert("Harap isi semua field pada Step 1, 2, dan 3 sebelum melanjutkan.");
+            currentStep = 0; // Balik ke Step 1
+            showStep(currentStep);
+            return;
+        }
+    }
+
     steps[currentStep].classList.add("hidden");
     currentStep += n;
 
