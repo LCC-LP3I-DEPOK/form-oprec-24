@@ -267,8 +267,8 @@
      <script src='https://cdnjs.cloudflare.com/ajax/libs/imask/3.4.0/imask.min.js'> </script>
 <script src="./script.js"></script>
 
-<script>
-   let currentStep = 0; // Menyimpan indeks langkah saat ini
+ <script>
+let currentStep = 0; // Menyimpan indeks langkah saat ini
 
 document.addEventListener("DOMContentLoaded", function() {
     const completedStep4 = localStorage.getItem("completedStep4");
@@ -309,6 +309,7 @@ function nextStep(event) {
         return; // Hentikan proses jika ada field yang belum diisi
     }
 
+    // Jika sudah sampai step terakhir, kirim data dan reset
     if (currentStep === steps.length - 1) {
         alert("Data berhasil dikirim!");
         localStorage.removeItem("completedStep4");
@@ -320,6 +321,7 @@ function nextStep(event) {
 
     event.preventDefault();
 
+    // Khusus untuk step 3, simpan flag dan lanjutkan ke step 4
     if (currentStep === 3) {
         localStorage.setItem("completedStep4", "true");
         currentStep = 4;
@@ -331,6 +333,7 @@ function nextStep(event) {
         return;
     }
 
+    // Jika tidak ada masalah, lanjutkan ke step berikutnya
     nextPrev(1);
 }
 
@@ -340,9 +343,9 @@ function nextPrev(n) {
     currentStep += n;
 
     if (currentStep >= steps.length) {
-        currentStep = steps.length - 1;
+        currentStep = steps.length - 1; // Tidak bisa lebih dari step terakhir
     } else if (currentStep < 0) {
-        currentStep = 0;
+        currentStep = 0; // Tidak bisa kurang dari step pertama
     }
 
     showStep(currentStep);
@@ -363,9 +366,7 @@ function showStep(step) {
     }
 }
 
-}
-
-</script>
+ </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
