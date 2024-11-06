@@ -268,7 +268,7 @@
 <script src="./script.js"></script>
 
  <script>
- let currentStep = 0; // Menyimpan indeks langkah saat ini
+let currentStep = 0; // Menyimpan indeks langkah saat ini
 
 document.addEventListener("DOMContentLoaded", function() {
     const completedStep4 = localStorage.getItem("completedStep4");
@@ -291,80 +291,27 @@ function closePopup() {
 function nextStep(event) {
     const steps = document.getElementsByClassName("step");
 
-    // Cek apakah semua field pada step saat ini sudah diisi
-    const currentFields = steps[currentStep].querySelectorAll("input[required]");
-    let allFilled = true;
-
-    currentFields.forEach(field => {
-        if (!field.value) {
-            allFilled = false;
-            field.classList.add('border-red-500'); // Tambahkan indikator jika field belum diisi
-        } else {
-            field.classList.remove('border-red-500');
-        }
-    });
-
-    // Jika ada field yang belum diisi, beri peringatan dan hentikan
-    if (!allFilled) {
-        alert("Harap isi semua field sebelum melanjutkan.");
-        return; // Hentikan proses jika ada field yang belum diisi
-    }
-
-    // Jika sudah sampai step terakhir (step 4), kirim data
-    if (currentStep === steps.length - 1) {
-        alert("Data berhasil dikirim!");
-        localStorage.removeItem("completedStep4");
-        localStorage.removeItem("currentStep");
-        currentStep = 0;
-        showStep(currentStep);
-        return true;
-    }
-
-    event.preventDefault();
-
-    // Khusus untuk step 3, simpan flag dan lanjutkan ke step 4
-    if (currentStep === 3) {
-        localStorage.setItem("completedStep4", "true");
-
-        // Kirim data atau lakukan aksi lain sebelum melanjutkan
-        setTimeout(function() {
-            // Setelah mengirim data, lanjutkan ke step berikutnya (step 4)
-            currentStep = 4;
-            showStep(currentStep);
-
-            // Redireksi ke halaman yang dituju
-            window.location.href = "https://www.instagram.com/lcc.lp3idepok?igsh=MTZxbmU4eXllZGl5aA==";
-        }, 500); // Delay sebelum melanjutkan ke langkah berikutnya
-        return;
-    }
-
-    // Jika tidak di step 3, lanjutkan ke langkah berikutnya
-    nextPrev(1);
-}
-
-function nextStep(event) {
-    const steps = document.getElementsByClassName("step");
-
-    // Ambil semua field di step saat ini (termasuk textarea)
+    // Ambil semua field yang required di langkah saat ini
     const currentFields = steps[currentStep].querySelectorAll("input[required], textarea[required]");
     let allFilled = true;
-    
+
+    // Cek apakah semua field terisi
     currentFields.forEach(field => {
         if (!field.value) {
             allFilled = false;
-            field.classList.add('border-red-500'); // Tambahkan indikator jika field belum diisi
+            field.classList.add('border-red-500'); // Tandai dengan border merah jika kosong
         } else {
-            field.classList.remove('border-red-500'); // Bersihkan indikator jika field sudah diisi
+            field.classList.remove('border-red-500'); // Bersihkan border merah jika sudah diisi
         }
     });
 
-    // Jika ada field yang belum diisi, tampilkan alert dan hentikan proses
+    // Jika ada field yang kosong, tampilkan peringatan dan hentikan proses
     if (!allFilled) {
         alert("Harap isi semua field sebelum melanjutkan.");
-        return; // Hentikan proses jika ada field yang belum diisi
+        return; // Hentikan proses jika ada field yang kosong
     }
 
-    // Proses pengiriman data jika di Step terakhir
+    // Jika sudah sampai step terakhir (step 4), kirim data dan reset langkah
     if (currentStep === steps.length - 1) {
         alert("Data berhasil dikirim!");
         localStorage.removeItem("completedStep4");
@@ -373,9 +320,6 @@ function nextStep(event) {
         showStep(currentStep);
         return true;
     }
-
-    // Pastikan tidak lanjut ke langkah berikutnya jika tidak ada langkah lanjut
-    event.preventDefault();
 
     // Jika berada di Step 3, set flag completedStep4 dan lanjut ke Step 4
     if (currentStep === 2) {
@@ -385,10 +329,10 @@ function nextStep(event) {
         return;
     }
 
-    // Lanjut ke langkah berikutnya (panggil nextPrev)
+    // Jika berada di Step selain 3, lanjutkan ke langkah berikutnya
+    event.preventDefault();
     nextPrev(1);
 }
-
 
 function showStep(step) {
     const steps = document.getElementsByClassName("step");
@@ -403,6 +347,25 @@ function showStep(step) {
     } else {
         document.getElementById('popup').classList.add('hidden');
     }
+}
+
+// Fungsi untuk melanjutkan ke step berikutnya atau sebelumnya
+function nextPrev(n) {
+    const steps = document.getElementsByClassName("step");
+
+    // Menyembunyikan langkah saat ini
+    steps[currentStep].classList.add("hidden");
+
+    // Menentukan langkah berikutnya
+    currentStep += n;
+
+    // Jika sudah di akhir, jangan lanjut
+    if (currentStep >= steps.length) {
+        currentStep = steps.length - 1;
+    }
+
+    // Tampilkan langkah berikutnya
+    showStep(currentStep);
 }
 
  </script>
