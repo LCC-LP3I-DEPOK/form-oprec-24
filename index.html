@@ -268,73 +268,27 @@
 <script src="./script.js"></script>
 
 <script>
-    let currentStep = 0; // Menyimpan indeks langkah saat ini
+   let currentStep = 0; // Menyimpan indeks langkah saat ini
 
-    document.addEventListener("DOMContentLoaded", function() {
-        const completedStep4 = localStorage.getItem("completedStep4");
+document.addEventListener("DOMContentLoaded", function() {
+    const completedStep4 = localStorage.getItem("completedStep4");
 
-        if (completedStep4 === "true") {
-            currentStep = 4; // Langsung ke Step 5
-            showStep(currentStep);
-            localStorage.removeItem("completedStep4");
-        } else {
-            currentStep = 0;
-            showStep(currentStep);
-            document.getElementById('popup').classList.remove('hidden');
-        }
-    });
-
-    function closePopup() {
-        document.getElementById('popup').classList.add('hidden');
+    if (completedStep4 === "true") {
+        currentStep = 4; // Langsung ke Step 5
+        showStep(currentStep);
+        localStorage.removeItem("completedStep4");
+    } else {
+        currentStep = 0;
+        showStep(currentStep);
+        document.getElementById('popup').classList.remove('hidden');
     }
+});
 
-    function nextStep(event) {
-        const steps = document.getElementsByClassName("step");
+function closePopup() {
+    document.getElementById('popup').classList.add('hidden');
+}
 
-        // Cek apakah semua field pada step saat ini sudah diisi
-        const currentFields = steps[currentStep].querySelectorAll("input[required]");
-        let allFilled = true;
-        
-        currentFields.forEach(field => {
-            if (!field.value) {
-                allFilled = false;
-                field.classList.add('border-red-500'); // Tambahkan indikator jika field belum diisi
-            } else {
-                field.classList.remove('border-red-500');
-            }
-        });
-
-        if (!allFilled) {
-            alert("Harap isi semua field sebelum melanjutkan.");
-            return; // Hentikan proses jika ada field yang belum diisi
-        }
-
-        if (currentStep === steps.length - 1) {
-            alert("Data berhasil dikirim!");
-            localStorage.removeItem("completedStep4");
-            localStorage.removeItem("currentStep");
-            currentStep = 0;
-            showStep(currentStep);
-            return true;
-        }
-
-        event.preventDefault();
-
-        if (currentStep === 3) {
-            localStorage.setItem("completedStep4", "true");
-            currentStep = 4;
-            showStep(currentStep);
-
-            setTimeout(function() {
-                window.location.href = "https://www.instagram.com/lcc.lp3idepok?igsh=MTZxbmU4eXllZGl5aA==";
-            }, 500);
-            return;
-        }
-
-        nextPrev(1);
-    }
-
-    function nextStep(event) {
+function nextStep(event) {
     const steps = document.getElementsByClassName("step");
 
     // Cek apakah semua field pada step saat ini sudah diisi
@@ -378,6 +332,37 @@
     }
 
     nextPrev(1);
+}
+
+function nextPrev(n) {
+    const steps = document.getElementsByClassName("step");
+    steps[currentStep].classList.add("hidden");
+    currentStep += n;
+
+    if (currentStep >= steps.length) {
+        currentStep = steps.length - 1;
+    } else if (currentStep < 0) {
+        currentStep = 0;
+    }
+
+    showStep(currentStep);
+}
+
+function showStep(step) {
+    const steps = document.getElementsByClassName("step");
+    for (let i = 0; i < steps.length; i++) {
+        steps[i].classList.add("hidden");
+    }
+    steps[step].classList.remove("hidden");
+
+    // Tampilkan pop-up di step pertama
+    if (step === 0) {
+        document.getElementById('popup').classList.remove('hidden');
+    } else {
+        document.getElementById('popup').classList.add('hidden');
+    }
+}
+
 }
 
 </script>
