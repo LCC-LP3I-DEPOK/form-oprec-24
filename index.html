@@ -238,23 +238,23 @@
                     </div>
                 </div>
             </div>
-            <div id="step3" class="step hidden">
-                <!-- Field untuk Step 3 -->
-                <div class="mb-4">
-                    <label for="join_reason" class="block text-sm font-bold text-gray-700">Alasan Bergabung</label>
-                    <textarea required id="join_reason" rows="4" name="entry.1495793965"
-                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-                        placeholder="Ceritakan Alasan Kamu Ingin Bergabung"></textarea>
-                </div>
-                
-                <div class="mb-4">
-                    <label for="join_expectation" class="block text-sm font-bold text-gray-700">Harapan Bergabung</label>
-                    <textarea required id="join_expectation" rows="4" name="entry.376906073"
-                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-                        placeholder="Ceritakan Harapan Kamu Setelah Bergabung"></textarea>
-                </div>
-                
-            </div>      
+           <div id="step3" class="step hidden">
+    <!-- Field untuk Step 3 -->
+    <div class="mb-4">
+        <label for="join_reason" class="block text-sm font-bold text-gray-700">Alasan Bergabung</label>
+        <textarea required id="join_reason" rows="4" name="entry.1495793965"
+            class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
+            placeholder="Ceritakan Alasan Kamu Ingin Bergabung"></textarea>
+    </div>
+    
+    <div class="mb-4">
+        <label for="join_expectation" class="block text-sm font-bold text-gray-700">Harapan Bergabung</label>
+        <textarea required id="join_expectation" rows="4" name="entry.376906073"
+            class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
+            placeholder="Ceritakan Harapan Kamu Setelah Bergabung"></textarea>
+    </div>
+</div>
+
             <!-- Tombol Navigasi -->
             <div class="flex justify-between mt-4">
                 <button id="prevBtn" onclick="nextPrev(-1); return false;" class="bg-gray-300 font-bold ccicon px-4 py-2 rounded-md hidden">Kembali</button>
@@ -342,42 +342,53 @@ function nextStep(event) {
     nextPrev(1);
 }
 
-function nextPrev(n) {
+function nextStep(event) {
     const steps = document.getElementsByClassName("step");
+
+    // Ambil semua field di step saat ini (termasuk textarea)
+    const currentFields = steps[currentStep].querySelectorAll("input[required], textarea[required]");
+    let allFilled = true;
     
-    // Jika user berada di step 3 dan ada field yang belum diisi, langsung balik ke step 1
-    if (n === 1 && currentStep === 3) {
-        const currentFields = steps[currentStep].querySelectorAll("input[required]");
-        let allFilled = true;
-
-        currentFields.forEach(field => {
-            if (!field.value) {
-                allFilled = false;
-                field.classList.add('border-red-500'); // Tambahkan indikator jika field belum diisi
-            } else {
-                field.classList.remove('border-red-500');
-            }
-        });
-
-        if (!allFilled) {
-            alert("Harap isi semua field pada Step 1, 2, dan 3 sebelum melanjutkan.");
-            currentStep = 0; // Balik ke Step 1
-            showStep(currentStep);
-            return;
+    currentFields.forEach(field => {
+        if (!field.value) {
+            allFilled = false;
+            field.classList.add('border-red-500'); // Tambahkan indikator jika field belum diisi
+        } else {
+            field.classList.remove('border-red-500'); // Bersihkan indikator jika field sudah diisi
         }
+    });
+
+    // Jika ada field yang belum diisi, tampilkan alert dan hentikan proses
+    if (!allFilled) {
+        alert("Harap isi semua field sebelum melanjutkan.");
+        return; // Hentikan proses jika ada field yang belum diisi
     }
 
-    steps[currentStep].classList.add("hidden");
-    currentStep += n;
-
-    if (currentStep >= steps.length) {
-        currentStep = steps.length - 1; // Tidak bisa lebih dari step terakhir
-    } else if (currentStep < 0) {
-        currentStep = 0; // Tidak bisa kurang dari step pertama
+    // Proses pengiriman data jika di Step terakhir
+    if (currentStep === steps.length - 1) {
+        alert("Data berhasil dikirim!");
+        localStorage.removeItem("completedStep4");
+        localStorage.removeItem("currentStep");
+        currentStep = 0;
+        showStep(currentStep);
+        return true;
     }
 
-    showStep(currentStep);
+    // Pastikan tidak lanjut ke langkah berikutnya jika tidak ada langkah lanjut
+    event.preventDefault();
+
+    // Jika berada di Step 3, set flag completedStep4 dan lanjut ke Step 4
+    if (currentStep === 2) {
+        localStorage.setItem("completedStep4", "true");
+        currentStep = 3;
+        showStep(currentStep);
+        return;
+    }
+
+    // Lanjut ke langkah berikutnya (panggil nextPrev)
+    nextPrev(1);
 }
+
 
 function showStep(step) {
     const steps = document.getElementsByClassName("step");
