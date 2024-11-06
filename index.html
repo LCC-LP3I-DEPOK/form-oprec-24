@@ -294,7 +294,7 @@ function nextStep(event) {
     // Cek apakah semua field pada step saat ini sudah diisi
     const currentFields = steps[currentStep].querySelectorAll("input[required]");
     let allFilled = true;
-    
+
     currentFields.forEach(field => {
         if (!field.value) {
             allFilled = false;
@@ -304,12 +304,13 @@ function nextStep(event) {
         }
     });
 
+    // Jika ada field yang belum diisi, beri peringatan dan hentikan
     if (!allFilled) {
         alert("Harap isi semua field sebelum melanjutkan.");
         return; // Hentikan proses jika ada field yang belum diisi
     }
 
-    // Jika sudah sampai step terakhir, kirim data dan reset
+    // Jika sudah sampai step terakhir (step 4), kirim data
     if (currentStep === steps.length - 1) {
         alert("Data berhasil dikirim!");
         localStorage.removeItem("completedStep4");
@@ -324,16 +325,21 @@ function nextStep(event) {
     // Khusus untuk step 3, simpan flag dan lanjutkan ke step 4
     if (currentStep === 3) {
         localStorage.setItem("completedStep4", "true");
-        currentStep = 4;
-        showStep(currentStep);
 
+        // Kirim data atau lakukan aksi lain sebelum melanjutkan
+        // Pastikan data sudah dikirimkan atau diproses sebelum lanjut ke step 4
         setTimeout(function() {
+            // Setelah mengirim data, lanjutkan ke step berikutnya (step 4)
+            currentStep = 4;
+            showStep(currentStep);
+
+            // Redireksi ke halaman yang dituju
             window.location.href = "https://www.instagram.com/lcc.lp3idepok?igsh=MTZxbmU4eXllZGl5aA==";
-        }, 500);
+        }, 500); // Delay sebelum melanjutkan ke langkah berikutnya
         return;
     }
 
-    // Jika tidak ada masalah, lanjutkan ke step berikutnya
+    // Jika tidak di step 3, lanjutkan ke langkah berikutnya
     nextPrev(1);
 }
 
